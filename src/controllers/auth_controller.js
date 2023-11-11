@@ -34,7 +34,7 @@ controller.login = async (req, res) => {
       );
 
       // res.header("Authorization", token);
-      res.status(200).json({ message: "Login Sucess", token: token });
+      res.status(200).json({ message: "Login Sucesss", token: token });
     }
   }
 };
