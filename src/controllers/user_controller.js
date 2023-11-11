@@ -7,7 +7,7 @@ controller.getUser = async (req, res) => {
   try {
     const user = await model.user.findOne({ where: { ID: npm } });
     if (!user) {
-      res.status(200).json({
+      res.status(402).json({
         message: "Data Not Found",
       });
     } else {
@@ -16,6 +16,36 @@ controller.getUser = async (req, res) => {
         data: user,
       });
     }
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};
+
+controller.getSingleUser = async (req, res) => {
+  const { npm } = req.params;
+  try {
+    const user = await model.user.findOne({ where: { ID: npm } });
+    if (!user) {
+      res.status(402).json({
+        message: "Data Not Found",
+      });
+    } else {
+      res.status(200).json({
+        message: "Success Get User",
+        data: user,
+      });
+    }
+
+    // if(user.length >0){
+    //   res.status(200).json({
+    //     message: "Success Get User",
+    //     data: user,
+    //   });
+    // }else {
+    //   res.status(200).json({
+    //     message: "Data Not Found",
+    //   });
+    // }
   } catch (error) {
     res.status(404).json({ message: error });
   }

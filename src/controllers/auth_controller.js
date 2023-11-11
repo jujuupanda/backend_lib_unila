@@ -6,19 +6,24 @@ const controller = {};
 
 controller.login = async (req, res) => {
   const { npm, password } = req.body;
+  // const npm = req.body;
+  // const password = req.body;
 
   const user = await model.user.findOne({
-    where: { ID: npm },
+    where: {
+      ID: npm,
+    },
   });
   if (!user) {
-    res.status(200).json({
+    res.status(401).json({
       message: "NPM not found",
     });
   } else {
+    // res.status(200).json({ message: "Login Sucesss", token: "1234" });
     const passwordValid = await bcrypt.compare(password, user.Pwd);
 
     if (!passwordValid) {
-      res.json({ message: "Invalid password" });
+      res.status(402).json({ message: "Invalid password" });
     } else {
       const token = jwt.sign(
         {

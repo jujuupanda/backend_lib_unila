@@ -7,6 +7,13 @@ const router = express.Router();
 // GET
 router.get("/getUser", verifyToken, controller.userController.getUser);
 
+// GET
+router.get(
+  "/getSingleUser/:npm",
+  verifyToken,
+  controller.userController.getSingleUser
+);
+
 // // POST
 // router.post("/", userController.createUser);
 
