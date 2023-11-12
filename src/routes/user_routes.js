@@ -18,7 +18,11 @@ router.get(
 // router.post("/", userController.createUser);
 
 // UPDATE
-router.patch("/patchUser", controller.userController.updateUser);
+router.patch("/patchUser/:npm", controller.userController.updateUser);
+router.patch(
+  "/patchUser/:npm/password",
+  controller.userController.updatePasswordUser
+);
 
 // // DELETE
 // router.delete("/:idUser", userController.deleteUser);

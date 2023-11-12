@@ -35,32 +35,20 @@ controller.getSingleUser = async (req, res) => {
         data: user,
       });
     }
-
-    // if(user.length >0){
-    //   res.status(200).json({
-    //     message: "Success Get User",
-    //     data: user,
-    //   });
-    // }else {
-    //   res.status(200).json({
-    //     message: "Data Not Found",
-    //   });
-    // }
   } catch (error) {
     res.status(404).json({ message: error });
   }
 };
 
 controller.updateUser = async (req, res) => {
-  const { npm, addr, phone, email, pwd } = req.body;
+  const { addr, phone, email } = req.body;
+  const { npm } = req.params;
   try {
-    const hashPassword = await bcrypt.hash(pwd, 10);
     const user = await model.user.update(
       {
         Addr: addr,
         EMail: email,
         Phone: phone,
-        Pwd: hashPassword,
       },
       {
         where: {
@@ -73,15 +61,58 @@ controller.updateUser = async (req, res) => {
         message: "Update success",
       });
     } else {
-      res.status(200).json({
+      res.status(401).json({
         message: "Update failed",
       });
     }
   } catch (error) {
-    res.status(400).json({
+    res.status(402).json({
       message: error,
     });
   }
 };
 
+controller.updatePasswordUser = async (req, res) => {
+  const { oldPwd, newPwd } = req.body;
+  const { npm } = req.params;
+
+  try {
+    const user = await model.user.findOne({
+      where: {
+        ID: npm,
+      },
+    });
+    const passwordValid = await bcrypt.compare(oldPwd, user.Pwd);
+
+    if (!passwordValid) {
+      res.status(402).json({ message: "Invalid password" });
+    } else {
+      const hashPassword = await bcrypt.hash(newPwd, 10);
+      const user = await model.user.update(
+        {
+          Pwd: hashPassword,
+        },
+        {
+          where: {
+            ID: npm,
+          },
+        }
+      );
+
+      if (user) {
+        res.status(200).json({
+          message: "Update success",
+        });
+      } else {
+        res.status(401).json({
+          message: "Update failed",
+        });
+      }
+    }
+  } catch (error) {
+    res.status(402).json({
+      message: error,
+    });
+  }
+};
 module.exports = controller;

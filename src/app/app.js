@@ -11,5 +11,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/user", routes.userRoute);
 app.use("/auth", routes.authRoute);
 app.use("/book", routes.bookRoute);
+app.use("/test", routes.testRoute);
 
 module.exports = app;
