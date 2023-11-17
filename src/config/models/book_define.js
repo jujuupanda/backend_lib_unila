@@ -83,7 +83,6 @@ const CItem = db.define(
     ItemNo: sequelize.STRING,
     ItemClss: sequelize.STRING,
     LocaCode: sequelize.STRING,
-    LocaCall: sequelize.STRING,
     CopyNo: sequelize.INTEGER,
     ItemStat: sequelize.STRING,
   },
@@ -128,8 +127,8 @@ EAut.hasOne(EAutBib, { foreignKey: "ABAutId" });
 EIdn.belongsTo(EBib, { foreignKey: "IdnBibId" }); //Search IDN from BibId
 EBib.hasOne(EIdn, { foreignKey: "IdnBibId" });
 
-EBib.belongsTo(CItem, { foreignKey: "BibId" }); //Seach Item from Bib Id
-CItem.hasMany(EBib, { foreignKey: "BibId" });
+// EBib.belongsTo(CItem, { foreignKey: "BibId" }); //Seach Item from Bib Id
+// CItem.hasMany(EBib, { foreignKey: "BibId" });
 
 module.exports = {
   ETit,
