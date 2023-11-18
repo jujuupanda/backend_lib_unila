@@ -1,6 +1,7 @@
 const sequelize = require("sequelize");
 const db = require("../database/database");
 
+//DB BOOKS
 const ETit = db.define(
   "ETit",
   {
@@ -92,26 +93,7 @@ const CItem = db.define(
   }
 );
 
-// ETitBib.belongsTo(ETit, { foreignKey: "TBTitId" });
-// ETit.hasOne(ETitBib, { foreignKey: "TBTitId" });
-
-// EBib.belongsTo(ETitBib, { foreignKey: "BibId" });
-// ETitBib.hasOne(EBib, { foreignKey: "BibId" });
-
-// EBib.belongsTo(EAutBib, { foreignKey: "BibId" });
-// EAutBib.hasMany(EBib, { foreignKey: "BibId" });
-
-// EAutBib.belongsTo(EAut, { foreignKey: "ABBibId" });
-// EAut.hasMany(EAutBib, { foreignKey: "ABBibId" });
-
-// EIdn.belongsTo(EBib, { foreignKey: "IdnBibId" });
-// EBib.hasOne(EIdn, { foreignKey: "IdnBibId" });
-
-// EBib.belongsTo(CItem, { foreignKey: "BibId" });
-// CItem.hasMany(EBib, { foreignKey: "BibId" });
-
-//Batas Bener tapi error di bagian aut (kadang)
-
+//ASSOCIATION
 ETitBib.belongsTo(ETit, { foreignKey: "TBTitId" }); //Search BibId
 ETit.hasOne(ETitBib, { foreignKey: "TBTitId" });
 
