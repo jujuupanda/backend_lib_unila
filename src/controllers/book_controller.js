@@ -95,16 +95,16 @@ controller.getBooks = async (req, res) => {
               model: model.book.EBib,
               attributes: ["BibId", "CalKey", "EdiRaw", "PubRaw"],
               include: [
-                {
-                  model: model.book.EAutBib,
-                  attributes: ["ABAutId"],
-                  include: [
-                    {
-                      model: model.book.EAut,
-                      attributes: ["AutKey"],
-                    },
-                  ],
-                },
+                // {
+                //   model: model.book.EAutBib,
+                //   attributes: ["ABAutId"],
+                //   include: [
+                //     {
+                //       model: model.book.EAut,
+                //       attributes: ["AutKey"],
+                //     },
+                //   ],
+                // },
                 {
                   model: model.book.EIdn,
                   attributes: ["IdnBibId", "IdnId", "IdnKey"],
@@ -128,14 +128,6 @@ controller.getBooks = async (req, res) => {
         .status(200)
         .json({ message: "Book Result", length: book.length, data: book });
     }
-
-    //Success Search Book
-    // const groupedBook = book.reduce((acc, currentItem) => {
-    //   acc[currentItem.ETitBib.EBib.CItem.ItemBib] =
-    //     acc[currentItem.ETitBib.EBib.CItem.ItemBib] || [];
-    //   acc[currentItem.ETitBib.EBib.CItem.ItemBib].push(currentItem);
-    //   return acc;
-    // }, {});
   } catch (error) {
     res.status(400).json({
       message: error,

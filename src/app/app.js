@@ -12,5 +12,6 @@ app.use("/user", routes.userRoute);
 app.use("/auth", routes.authRoute);
 app.use("/book", routes.bookRoute);
 app.use("/test", routes.testRoute);
+app.use("/circulation", routes.circulationRoute);
 
 module.exports = app;
