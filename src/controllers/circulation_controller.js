@@ -91,5 +91,30 @@ controller.getCirculationStatus = async (req, res) => {
     });
   }
 };
+controller.getCirculationAccount = async (req, res) => {
+  const { npm } = req.body;
+
+  try {
+    const account = await model.circulation.CAccount.findAll({
+      where: {
+        ID: npm,
+      },
+    });
+
+    if (account.length == 0) {
+      res.status(201).json({ message: "Account Circulation does not exist" });
+    } else {
+      res.status(200).json({
+        message: "Account Circulation Result",
+        length: account.length,
+        data: account,
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: error,
+    });
+  }
+};
 
 module.exports = controller;
