@@ -13,4 +13,8 @@ router.post(
   controller.circulationController.getCirculationStatus
 );
 
+router.post(
+  "/getCirculation/account",
+  controller.circulationController.getCirculationAccount
+);
 module.exports = router;

@@ -98,6 +98,21 @@ const EIdn = db.define(
   }
 );
 
+const CAccount = db.define(
+  "CAccount",
+  {
+    ID: { type: sequelize.STRING, primaryKey: true },
+    ItemNo: sequelize.STRING,
+    FineAmnt: sequelize.DECIMAL,
+    PaidAmnt: sequelize.DECIMAL,
+    PaidDate: sequelize.DATE,
+  },
+  {
+    freezeTableName: true,
+    timestamps: false,
+  }
+);
+
 //History
 CMCirculation.belongsTo(CItem, { foreignKey: "ItemNo" });
 CItem.hasOne(CMCirculation, { foreignKey: "ItemNo" });
@@ -126,4 +141,5 @@ module.exports = {
   ETit,
   EBib,
   EIdn,
+  CAccount,
 };
