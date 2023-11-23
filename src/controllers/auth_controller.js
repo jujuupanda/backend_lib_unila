@@ -19,7 +19,8 @@ controller.login = async (req, res) => {
       message: "NPM not found",
     });
   } else {
-    const passwordValid = await bcrypt.compare(password, user.Pwd);
+    // const passwordValid = await bcrypt.compare(password, user.Pwd); //Using Bcrypt
+    const passwordValid = password === user.ID; //Normal
 
     if (!passwordValid) {
       res.status(402).json({ message: "Invalid password" });

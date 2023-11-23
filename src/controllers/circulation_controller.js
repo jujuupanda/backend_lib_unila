@@ -96,6 +96,24 @@ controller.getCirculationAccount = async (req, res) => {
 
   try {
     const account = await model.circulation.CAccount.findAll({
+      include: [
+        {
+          model: model.circulation.CItem,
+          include: [
+            {
+              model: model.circulation.EBib,
+            },
+            {
+              model: model.circulation.ETitBib,
+              include: [
+                {
+                  model: model.circulation.ETit,
+                },
+              ],
+            },
+          ],
+        },
+      ],
       where: {
         ID: npm,
       },
