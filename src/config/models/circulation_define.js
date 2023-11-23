@@ -103,6 +103,7 @@ const CAccount = db.define(
   {
     ID: { type: sequelize.STRING, primaryKey: true },
     ItemNo: sequelize.STRING,
+    ChkODate: sequelize.DATE,
     FineAmnt: sequelize.DECIMAL,
     PaidAmnt: sequelize.DECIMAL,
     PaidDate: sequelize.DATE,
@@ -132,6 +133,10 @@ ETit.hasOne(ETitBib, { foreignKey: "TBTitId" });
 //Status
 CCirculation.belongsTo(CItem, { foreignKey: "ItemNo" });
 CItem.hasOne(CCirculation, { foreignKey: "ItemNo" });
+
+//Account Circulation
+CAccount.belongsTo(CItem, { foreignKey: "ItemNo" });
+CItem.hasOne(CAccount, { foreignKey: "ItemNo" });
 
 module.exports = {
   CMCirculation,
