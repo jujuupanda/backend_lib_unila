@@ -9,6 +9,11 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 const db = new sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, {
   dialect: DB_DIALECT,
   host: DB_HOST,
+  dialectOptions: { 
+    options: {
+      encrypt: false
+    }
+  }
 });
 
 module.exports = db;
