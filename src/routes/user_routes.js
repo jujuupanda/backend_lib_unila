@@ -14,6 +14,12 @@ router.get(
   controller.userController.getSingleUser
 );
 
+router.post(
+  "/getUserSSO",
+  verifyToken,
+  controller.userController.getUserSSO
+);
+
 // // POST
 // router.post("/", userController.createUser);
 

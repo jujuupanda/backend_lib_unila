@@ -40,6 +40,26 @@ controller.getSingleUser = async (req, res) => {
   }
 };
 
+controller.getUserSSO = async (req, res) => {
+  const { name } = req.body;
+  try {
+    const user = await model.user.findOne({ where: { FName: name } });
+    if (!user) {
+      res.status(402).json({
+        message: "Data Not Found",
+      });
+    } else {
+      res.status(200).json({
+        message: "Success Get User",
+        data: user,
+      });
+    }
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
+};
+
+
 controller.updateUser = async (req, res) => {
   const { addr, phone, email } = req.body;
   const { npm } = req.params;
