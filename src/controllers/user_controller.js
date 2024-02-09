@@ -1,5 +1,6 @@
 const model = require("../config/models/define_model");
 const bcrypt = require("bcrypt");
+const sequelize = require('sequelize');
 const controller = {};
 
 controller.getUser = async (req, res) => {
@@ -43,7 +44,13 @@ controller.getSingleUser = async (req, res) => {
 controller.getUserSSO = async (req, res) => {
   const { name } = req.body;
   try {
-    const user = await model.user.findOne({ where: { FName: name } });
+    const user = await model.user.findOne(
+      { 
+        where: {
+          FName: sequelize.where(sequelize.fn('LOWER', sequelize.col('FName')), 'LIKE', '%' + name + '%')
+        }
+      });
+    // const user = await model.user.findOne({ where: { FName: name} });
     if (!user) {
       res.status(402).json({
         message: "Data Not Found",
