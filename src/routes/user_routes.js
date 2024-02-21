@@ -8,10 +8,17 @@ const router = express.Router();
 router.get("/getUser", verifyToken, controller.userController.getUser);
 
 // GET
+
 router.get(
   "/getSingleUser/:npm",
   verifyToken,
   controller.userController.getSingleUser
+);
+
+router.get(
+  "/getUserSSO/:name",
+  verifyToken,
+  controller.userController.getUserSSO
 );
 
 // // POST
@@ -22,6 +29,10 @@ router.patch("/patchUser/:npm", controller.userController.updateUser);
 router.patch(
   "/patchUser/:npm/password",
   controller.userController.updatePasswordUser
+);
+router.patch(
+  "/patchUser/:npm/passwordMd5",
+  controller.userController.updatePasswordUserMd5
 );
 
 // // DELETE
