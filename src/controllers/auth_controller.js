@@ -31,6 +31,7 @@ controller.login = async (req, res) => {
           npm: user.ID,
           fname: user.FName,
           lname: user.LName,
+          type: user.Type
         },
         process.env.JWT_SECRET,
         {

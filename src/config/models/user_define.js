@@ -10,9 +10,12 @@ const user = db.define(
     },
     FName: sequelize.STRING,
     LName: sequelize.STRING,
+    Type: sequelize.STRING,
     Addr: sequelize.STRING,
     EMail: sequelize.STRING,
     Phone: sequelize.STRING,
+    Remark: sequelize.STRING,
+    AlertMsg: sequelize.STRING,
     Pwd: sequelize.STRING,
   },
   {
