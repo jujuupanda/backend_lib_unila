@@ -46,35 +46,4 @@ controller.login = async (req, res) => {
   }
 };
 
-controller.loginSSO = async (req, res) => {
-  const token = req.query
-  const secretKey= 'Qwerty123'
-  // if(token!=null){
-  //   res.status(200).json({ message: "Login Sucesss", token: "newToken" });
-  // }
-  if(token != null){
-    const decoded = jwt.decode(token.token);
-    res.status(200).json({ message: "Login Sucesss", token: decoded });
-  }
-  //BATAS
-  // if (token != null) {
-  //   const decoded = jwt.verify(token, secretKey);
-  //   // var userId = decoded.id_pengguna;
-  //   var userId = decoded;
-  //   console.log(userId);
-  //   const newToken = jwt.sign(
-  //     {
-  //       name: userId,
-  //     },
-  //     process.env.JWT_SECRET,
-  //     {
-  //       expiresIn: process.env.JWT_EXP,
-  //       noTimestamp: true,
-  //     }
-  //   );
-  //   res.status(200).json({ message: "Login Sucesss", token: newToken });
-  // }
-  //BATAS
-}
-
 module.exports = controller;
